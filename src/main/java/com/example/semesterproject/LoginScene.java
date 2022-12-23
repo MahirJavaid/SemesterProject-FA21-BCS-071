@@ -1,14 +1,13 @@
 package com.example.semesterproject;
 
 import javafx.geometry.Insets;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -35,31 +34,33 @@ public class LoginScene {
         logoutButton.setOnAction(actionEvent -> {
             stage.setScene(main);
         });
-        grid.add(logoutButton,26,15);
+        grid.add(logoutButton,0,6);
+        logoutButton.setPrefSize(150,25);
+
 
         Button addButton = new Button("Add Stock");
-        addButton.setPrefSize(150,150);
+        addButton.setPrefSize(150,25);
         addButton.setFont(new Font("Times new Roman", 15));
         addButton.setOnAction(actionEvent -> {
-            add();
+            Inventory.add();
         });
 
         Button updateButton = new Button("Remove Item");
-        updateButton.setPrefSize(150,150);
+        updateButton.setPrefSize(150,25);
         updateButton.setFont(new Font("Times new Roman", 15));
         updateButton.setOnAction(actionEvent -> {
             update();
         });
 
         Button salesButton = new Button("Add Sales Info.");
-        salesButton.setPrefSize(150,150);
+        salesButton.setPrefSize(150,25);
         salesButton.setFont(new Font("Times new Roman", 15));
         salesButton.setOnAction(actionEvent -> {
             sales();
         });
 
         Button profitButton = new Button("Calculate Profit");
-        profitButton.setPrefSize(150,150);
+        profitButton.setPrefSize(150,25);
         profitButton.setFont(new Font("Times new Roman", 15));
         profitButton.setOnAction(actionEvent -> {
             profit();
@@ -73,7 +74,7 @@ public class LoginScene {
         return new Scene(grid, 1000,600);
     }
 
-    public static Scene add(){
+    /*public static Scene add(){
         GridPane grid1 = new GridPane();
         grid1.setHgap(25);
         grid1.setVgap(25);
@@ -115,7 +116,7 @@ public class LoginScene {
         stage1.setScene(scene1);
         stage1.show();
         return scene1;
-    }
+    }*/
 
     public static Scene profit(){
         GridPane grid1 = new GridPane();
@@ -137,9 +138,24 @@ public class LoginScene {
         Button calculate_btn = new Button("Calculate");
         calculate_btn.setFont(new Font("Times new Roman", 15));
         grid1.add(calculate_btn,1,3);
-        /*calculate_btn.setOnAction(actionEvent -> {
-            Text t1 = new Text();
-        });*/
+        calculate_btn.setOnAction(actionEvent -> {
+            System.out.println("abc");
+            int q1 = Integer.parseInt(priceField.getText());
+            int q2 = Integer.parseInt(priceField2.getText());
+            System.out.println(q1);
+            System.out.println(q2);
+            {
+                System.out.println("abc");
+                q1 = q1 - q2;
+                Stage s1 = new Stage();
+                Scene c1 = new Scene(new Group(), 200,200);
+
+                ((Group) c1.getRoot()).getChildren().add(new Label(String.valueOf(q1)));
+
+                s1.setScene(c1);
+                s1.show();
+            }
+        });
         Scene scene1 = new Scene(grid1,400,300);
         Stage stage1 = new Stage();
         stage1.setScene(scene1);
@@ -167,9 +183,20 @@ public class LoginScene {
         Button done_btn = new Button("Done");
         done_btn.setFont(new Font("Times new Roman", 15));
         grid1.add(done_btn,1,3);
-        /*done_btn.setOnAction(actionEvent -> {
-            Text t1 = new Text();
-        });*/
+        done_btn.setOnAction(actionEvent -> {
+            Node n = grid.lookup("#"+fruitField.getText());
+            if(n==null){
+                return;
+            }
+            VBox v = (VBox)n;
+            Label qL = ((Label)v.getChildren().get(1));
+            int q1 = Integer.parseInt(quantityField.getText());
+            int q2 = Integer.parseInt(qL.getText());
+            if(q2 >= q1) {
+                q1 = q2 - q1;
+                qL.setText(String.valueOf(q1));
+            }
+        });
         Scene scene1 = new Scene(grid1,400,300);
         Stage stage1 = new Stage();
         stage1.setScene(scene1);
@@ -192,7 +219,8 @@ public class LoginScene {
         remove_btn.setFont(new Font("Times new Roman", 15));
         grid1.add(remove_btn,1,3);
         remove_btn.setOnAction(actionEvent -> {
-
+            Node rmv = grid.lookup("#"+removeField.getText());
+            grid.getChildren().remove(rmv);
         });
         Scene scene1 = new Scene(grid1,400,300);
         Stage stage1 = new Stage();

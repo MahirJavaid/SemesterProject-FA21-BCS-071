@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -26,6 +28,15 @@ public class Driver extends Application {
     public static Stage stage;
     public static GridPane grid = new GridPane();
     public static Scene main;
+
+    /*static ImageView backImg;
+    static {
+        backImg = new ImageView(new Image("ImageResources/images.jpeg"));
+        backImg.setFitWidth(800);
+        backImg.setFitHeight(550);
+        backImg.setOpacity(0.1);
+        backImg.setMouseTransparent(true);
+    }*/
 
     @Override
     public void start(Stage stage) throws IOException {

@@ -7,3 +7,6 @@ Pol	asdz
 Pol	asdz
 Ploy	1234
 Don	0123
+minal	minal
+minal	lopo
+Mahir	123
