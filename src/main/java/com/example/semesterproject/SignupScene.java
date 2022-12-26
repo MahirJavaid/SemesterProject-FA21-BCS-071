@@ -74,9 +74,11 @@ public class SignupScene {
         });
 
         back.setOnAction(actionEvent -> {
+            stage.setTitle("Login Page");
             stage.setScene(main);
         });
 
+        stage.setTitle("Sign Up");
         return new Scene(grid, 800, 550);
     }
 }

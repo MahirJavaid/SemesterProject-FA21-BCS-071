@@ -32,6 +32,7 @@ public class LoginScene {
         Button logoutButton = new Button("Log Out");
         logoutButton.setFont(new Font("Times new Roman", 15));
         logoutButton.setOnAction(actionEvent -> {
+            stage.setTitle("Login Page");
             stage.setScene(main);
         });
         grid.add(logoutButton,0,6);
@@ -49,21 +50,21 @@ public class LoginScene {
         updateButton.setPrefSize(150,25);
         updateButton.setFont(new Font("Times new Roman", 15));
         updateButton.setOnAction(actionEvent -> {
-            update();
+            Inventory.remove();
         });
 
         Button salesButton = new Button("Add Sales Info.");
         salesButton.setPrefSize(150,25);
         salesButton.setFont(new Font("Times new Roman", 15));
         salesButton.setOnAction(actionEvent -> {
-            sales();
+            CalculateSales.sales();
         });
 
         Button profitButton = new Button("Calculate Profit");
         profitButton.setPrefSize(150,25);
         profitButton.setFont(new Font("Times new Roman", 15));
         profitButton.setOnAction(actionEvent -> {
-            profit();
+            CalculateSales.profit();
         });
 
         grid.add(addButton,0,2);
@@ -71,161 +72,7 @@ public class LoginScene {
         grid.add(salesButton,0,4);
         grid.add(profitButton,0,5);
 
+        stage.setTitle("Home Page");
         return new Scene(grid, 1000,600);
-    }
-
-    /*public static Scene add(){
-        GridPane grid1 = new GridPane();
-        grid1.setHgap(25);
-        grid1.setVgap(25);
-        grid1.setPadding(new Insets(25, 25, 25, 25));
-        Label item = new Label("Name of Item:");
-        item.setFont(new Font("Times new Roman",15));
-        grid1.add(item,0,1);
-        TextField itemField = new TextField();
-        itemField.setPromptText("Enter Name of Fruit");
-        grid1.add(itemField,1,1);
-        Label quantity = new Label("Quantity:");
-        quantity.setFont(new Font("Times new Roman",15));
-        grid1.add(quantity,0,2);
-        TextField quantityField = new TextField();
-        quantityField.setPromptText("Enter Quantity of Fruit");
-        grid1.add(quantityField,1,2);
-        Label price = new Label("Price of item:");
-        price.setFont(new Font("Times new Roman",15));
-        grid1.add(price,0,3);
-        TextField priceField = new TextField();
-        priceField.setPromptText("Enter Price of Fruit");
-        grid1.add(priceField,1,3);
-        Button add_btn = new Button("Add");
-        add_btn.setFont(new Font("Times new Roman", 15));
-        grid1.add(add_btn,2,5);
-        add_btn.setOnAction(actionEvent -> {
-            Text t1 = new Text();
-            t1.setText(itemField.getText());
-            grid.add(t1,1,1);
-            Text t2 = new Text();
-            t2.setText(quantityField.getText());
-            grid.add(t2,1,2);
-            Text t3 = new Text();
-            t3.setText(priceField.getText());
-            grid.add(t3,1,3);
-        });
-        Scene scene1 = new Scene(grid1,400,300);
-        Stage stage1 = new Stage();
-        stage1.setScene(scene1);
-        stage1.show();
-        return scene1;
-    }*/
-
-    public static Scene profit(){
-        GridPane grid1 = new GridPane();
-        grid1.setHgap(25);
-        grid1.setVgap(25);
-        grid1.setPadding(new Insets(25, 25, 25, 25));
-        Label price = new Label("Market price of Fruits");
-        price.setFont(new Font("Times new Roman",15));
-        grid1.add(price,0,1);
-        TextField priceField = new TextField();
-        priceField.setPromptText("Enter Market price of Fruits");
-        grid1.add(priceField,1,1);
-        Label price2 = new Label("Selling price of Fruits");
-        price2.setFont(new Font("Times new Roman",15));
-        grid1.add(price2,0,2);
-        TextField priceField2 = new TextField();
-        priceField2.setPromptText("Enter Selling price of Fruits");
-        grid1.add(priceField2,1,2);
-        Button calculate_btn = new Button("Calculate");
-        calculate_btn.setFont(new Font("Times new Roman", 15));
-        grid1.add(calculate_btn,1,3);
-        calculate_btn.setOnAction(actionEvent -> {
-            System.out.println("abc");
-            int q1 = Integer.parseInt(priceField.getText());
-            int q2 = Integer.parseInt(priceField2.getText());
-            System.out.println(q1);
-            System.out.println(q2);
-            {
-                System.out.println("abc");
-                q1 = q1 - q2;
-                Stage s1 = new Stage();
-                Scene c1 = new Scene(new Group(), 200,200);
-
-                ((Group) c1.getRoot()).getChildren().add(new Label(String.valueOf(q1)));
-
-                s1.setScene(c1);
-                s1.show();
-            }
-        });
-        Scene scene1 = new Scene(grid1,400,300);
-        Stage stage1 = new Stage();
-        stage1.setScene(scene1);
-        stage1.show();
-        return scene1;
-    }
-
-    public static Scene sales(){
-        GridPane grid1 = new GridPane();
-        grid1.setHgap(25);
-        grid1.setVgap(25);
-        grid1.setPadding(new Insets(25, 25, 25, 25));
-        Label fruits = new Label("Name of Fruit");
-        fruits.setFont(new Font("Times new Roman",15));
-        grid1.add(fruits,0,1);
-        TextField fruitField = new TextField();
-        fruitField.setPromptText("Enter Name of Fruit");
-        grid1.add(fruitField,1,1);
-        Label quantity = new Label("Sold quantity of Fruit");
-        quantity.setFont(new Font("Times new Roman",15));
-        grid1.add(quantity,0,2);
-        TextField quantityField = new TextField();
-        quantityField.setPromptText("Enter Name of Fruit");
-        grid1.add(quantityField,1,2);
-        Button done_btn = new Button("Done");
-        done_btn.setFont(new Font("Times new Roman", 15));
-        grid1.add(done_btn,1,3);
-        done_btn.setOnAction(actionEvent -> {
-            Node n = grid.lookup("#"+fruitField.getText());
-            if(n==null){
-                return;
-            }
-            VBox v = (VBox)n;
-            Label qL = ((Label)v.getChildren().get(1));
-            int q1 = Integer.parseInt(quantityField.getText());
-            int q2 = Integer.parseInt(qL.getText());
-            if(q2 >= q1) {
-                q1 = q2 - q1;
-                qL.setText(String.valueOf(q1));
-            }
-        });
-        Scene scene1 = new Scene(grid1,400,300);
-        Stage stage1 = new Stage();
-        stage1.setScene(scene1);
-        stage1.show();
-        return scene1;
-    }
-
-    public static Scene update(){
-        GridPane grid1 = new GridPane();
-        grid1.setHgap(25);
-        grid1.setVgap(25);
-        grid1.setPadding(new Insets(25, 25, 25, 25));
-        Label removeFruits = new Label("Name of Fruit to Remove");
-        removeFruits.setFont(new Font("Times new Roman",15));
-        grid1.add(removeFruits,0,1);
-        TextField removeField = new TextField();
-        removeField.setPromptText("Enter Name of Fruit");
-        grid1.add(removeField,1,1);
-        Button remove_btn = new Button("Remove");
-        remove_btn.setFont(new Font("Times new Roman", 15));
-        grid1.add(remove_btn,1,3);
-        remove_btn.setOnAction(actionEvent -> {
-            Node rmv = grid.lookup("#"+removeField.getText());
-            grid.getChildren().remove(rmv);
-        });
-        Scene scene1 = new Scene(grid1,400,300);
-        Stage stage1 = new Stage();
-        stage1.setScene(scene1);
-        stage1.show();
-        return scene1;
     }
 }

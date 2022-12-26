@@ -10,3 +10,4 @@ Don	0123
 minal	minal
 minal	lopo
 Mahir	123
+Minal	0000

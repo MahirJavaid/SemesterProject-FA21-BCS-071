@@ -1,7 +1,7 @@
 package com.example.semesterproject;
 
 import javafx.geometry.Insets;
-import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,7 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import static com.example.semesterproject.LoginScene.grid;
 
@@ -18,6 +17,7 @@ import java.util.ArrayList;
 public class Inventory {
     public static Scene add(){
         GridPane grid1 = new GridPane();
+        grid1.setBackground(new Background(new BackgroundFill(Color.rgb(0,120,120), new CornerRadii(0), new Insets(0))));
         Scene scene1 = new Scene(grid1,400,300);
         Stage stage1 = new Stage();
         stage1.setScene(scene1);
@@ -68,11 +68,40 @@ public class Inventory {
             vbox.getChildren().addAll(l1,l2,l3);
             vbox.setPrefSize(100,50);
             vbox.setId(f1.getName());
-            vbox.setBackground(new Background(new BackgroundFill(Color.LAVENDERBLUSH, CornerRadii.EMPTY, new Insets(0))));
+            vbox.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, new Insets(0))));
             grid.add(vbox,grid.getColumnCount(),2,3,1);
 
         });
+        stage1.setTitle("Add Fruits");
+        stage1.setOpacity(0.9);
+        stage1.show();
+        return scene1;
+    }
 
+    public static Scene remove(){
+        GridPane grid1 = new GridPane();
+        grid1.setBackground(new Background(new BackgroundFill(Color.rgb(0,120,120), new CornerRadii(0), new Insets(0))));
+        grid1.setHgap(25);
+        grid1.setVgap(25);
+        grid1.setPadding(new Insets(25, 25, 25, 25));
+        Label removeFruits = new Label("Name of Fruit to Remove");
+        removeFruits.setFont(new Font("Times new Roman",15));
+        grid1.add(removeFruits,0,1);
+        TextField removeField = new TextField();
+        removeField.setPromptText("Enter Name of Fruit");
+        grid1.add(removeField,1,1);
+        Button remove_btn = new Button("Remove");
+        remove_btn.setFont(new Font("Times new Roman", 15));
+        grid1.add(remove_btn,1,3);
+        remove_btn.setOnAction(actionEvent -> {
+            Node rmv = grid.lookup("#"+removeField.getText());
+            grid.getChildren().remove(rmv);
+        });
+        Scene scene1 = new Scene(grid1,400,300);
+        Stage stage1 = new Stage();
+        stage1.setTitle("Remove Item");
+        stage1.setOpacity(0.9);
+        stage1.setScene(scene1);
         stage1.show();
         return scene1;
     }
