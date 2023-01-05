@@ -10,10 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -28,15 +25,16 @@ public class Driver extends Application {
     public static Stage stage;
     public static GridPane grid = new GridPane();
     public static Scene main;
+    public static String username;
 
-    /*static ImageView backImg;
+    static ImageView backImg;
     static {
-        backImg = new ImageView(new Image("ImageResources/images.jpeg"));
+        backImg = new ImageView(new Image("D:\\HP 840\\Documents\\Study Material\\3rd Semester\\OOP\\SemesterProject\\src\\ImageResources\\frontImage.jpg"));
         backImg.setFitWidth(800);
         backImg.setFitHeight(550);
-        backImg.setOpacity(0.1);
+        backImg.setOpacity(0.8);
         backImg.setMouseTransparent(true);
-    }*/
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -50,8 +48,7 @@ public class Driver extends Application {
 
     public static Scene login(){
         GridPane grid2 = new GridPane();
-        grid2.setBackground(new Background(new BackgroundFill(Color.rgb(140,200,140), new CornerRadii(0), new Insets(0))));
-        Scene scene2 = new Scene( grid2, 800, 550 );
+        grid2.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, new CornerRadii(0), new Insets(0))));
         grid2.setAlignment(Pos.CENTER);
         grid2.setHgap(25);
         grid2.setVgap(25);
@@ -79,8 +76,16 @@ public class Driver extends Application {
         grid2.add(signupButton,1,3);
         Text text2 = new Text();
         grid2.add(text2,1,4);
+        Text text3 = new Text();
+        grid2.add(text3,1,5);
+
+        StackPane stack = new StackPane();
+        stack.getChildren().add(backImg);
+        stack.getChildren().add(grid2);
+        Scene scene2 = new Scene( stack, 800, 550 );
+
         Event1(signupButton);
-        Event2(loginButton, userTextField, passwordField, text2);
+        Event2(loginButton, userTextField, passwordField, text2, text3);
         return scene2;
     }
 
@@ -90,11 +95,11 @@ public class Driver extends Application {
         });
     }
 
-    public static void Event2(Button loginButton, TextField userTextField, PasswordField passwordField, Text text2){
+    public static void Event2(Button loginButton, TextField userTextField, PasswordField passwordField, Text text2, Text text3){
         loginButton.setOnAction(actionEvent -> {
             boolean b1 = false;
             String lineReader;
-            String username = userTextField.getText().toString();
+            username = userTextField.getText().toString();
             String password = passwordField.getText().toString();
 
             if( username == null || password == null || username.equals("") || password.equals("")){
@@ -109,6 +114,9 @@ public class Driver extends Application {
                         b1 = true;
                         break;
                     }
+                    /*else {
+                        text3.setText("Incorrect Username or Password");
+                    }*/
                 }
                 fileReader.close();
             } catch (IOException exception){

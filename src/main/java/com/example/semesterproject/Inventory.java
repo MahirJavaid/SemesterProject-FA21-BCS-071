@@ -11,7 +11,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import static com.example.semesterproject.LoginScene.grid;
+import static com.example.semesterproject.Driver.username;
+import static com.example.semesterproject.LoginScene.storage;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Inventory {
@@ -71,6 +75,13 @@ public class Inventory {
             vbox.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, new Insets(0))));
             grid.add(vbox,grid.getColumnCount(),2,3,1);
 
+            try {
+                FileWriter fileWriter = new FileWriter( "UserData.txt", true);
+                fileWriter.write( username + "\t" + itemField.getText() + "\t" + quantityField.getText() + "\t" + priceField.getText() + "\n" );
+                fileWriter.close();
+            }catch ( IOException exception ){
+                throw new RuntimeException(exception);
+            }
         });
         stage1.setTitle("Add Fruits");
         stage1.setOpacity(0.9);

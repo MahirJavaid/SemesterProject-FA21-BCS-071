@@ -54,6 +54,7 @@ public class CalculateSales {
         Stage stage1 = new Stage();
         stage1.setTitle("Calculate Sales");
         stage1.setScene(scene1);
+        stage1.setOpacity(0.9);
         stage1.show();
         return scene1;
     }
@@ -95,6 +96,7 @@ public class CalculateSales {
         Stage stage1 = new Stage();
         stage1.setTitle("Calculate Profit");
         stage1.setScene(scene1);
+        stage1.setOpacity(0.9);
         stage1.show();
         return scene1;
     }
